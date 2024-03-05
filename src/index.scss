@@ -1,0 +1,66 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Roboto", sans-serif;
+	line-height: 21px;
+	font-size: 14px;
+}
+.test__container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 48px;
+	.test__item {
+		position: relative;
+		width: 225px;
+		height: 225px;
+
+		.test__bg {
+			background-color: white;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			box-shadow: (0px 6px 5px rgba(0, 0, 0, 0.24)), (0px 9px 18px rgba(0, 0, 0, 0.18));
+			transition: all 500ms ease;
+		}
+		.gradient {
+			z-index: 3;
+			width: 257px;
+			height: 100px;
+			position: absolute;
+			bottom: -16px;
+			left: -16px;
+
+			background: linear-gradient(0deg, rgb(255, 255, 255) 35%, rgba(255, 255, 255, 0) 100%);
+			transition: all 500ms ease;
+			opacity: 0;
+		}
+		.test__img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 225px;
+			height: 225px;
+			object-fit: cover;
+			z-index: 2;
+		}
+		.svg {
+			position: absolute;
+			right: 17px;
+			bottom: 23px;
+			opacity: 0;
+			z-index: 30;
+		}
+		.svg-liked {
+			opacity: 0;
+			position: absolute;
+			right: 17px;
+			bottom: 23px;
+			z-index: 30;
+		}
+		.button {
+			background-color: transparent;
+			border: none;
+		}
+	}
+}
