@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-// import { fetchCats } from './asyncActions'
 import { Status, favoriteSliceState } from '../../utils/interfaces'
+import { RootState } from '../store'
+
 
 
 const initialState: favoriteSliceState = {
-	favorites: [],
+
 	cats: [],
+	favorites: [],
 	status: Status.LOADING, // loading | success | error
 }
 
@@ -35,7 +37,7 @@ export const favoriteSlice = createSlice({
 
 })
 
-
+export const selectCat = (state: RootState) => state.favorites
 export const { setFavorite, toggleFavorite, setCats } = favoriteSlice.actions
 
 export default favoriteSlice.reducer

@@ -32,12 +32,33 @@
 		.header__liked {
 			width: 173px;
 		}
+		button {
+			background-color: #2196f3;
+			border: 2px solid transparent;
+			border-radius: 5px;
+			margin-left: 25%;
+			width: 200px;
+			&:hover {
+				border: 2px solid rgba(0, 0, 0, 0.15);
+				background-color: #1e88e5;
+			}
+		}
 	}
 }
 .cats__container {
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	flex-wrap: wrap;
 	gap: 48px;
+	.cats__gag {
+		font-size: 20px;
+		width: 225px;
+		height: 225px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+	}
 	.cats__item {
 		position: relative;
 		width: 225px;
@@ -86,6 +107,7 @@
 			right: 17px;
 			bottom: 23px;
 			z-index: 30;
+			transition: all 700ms ease;
 		}
 		.button {
 			background-color: transparent;
@@ -148,6 +170,10 @@ a {
 	opacity: 0;
 }
 .button:hover .svg-liked {
+	opacity: 1;
+	transition: all 500ms ease;
+}
+.button:active .svg-liked {
 	opacity: 1;
 	transition: all 500ms ease;
 }

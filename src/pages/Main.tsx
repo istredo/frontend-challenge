@@ -1,33 +1,54 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { ICats } from '../utils/interfaces';
 import Cat from '../components/Cat';
-import { RootState } from '../redux/store'
+import { selectCat } from '../redux/slices/favoriteSlice';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { LIMIT } from '../utils/const';
 
 const Main = () => {
+	const { cats } = useSelector(selectCat)
+
+	// infinity scroll-------------
+
+	const [postData, setPostData] = React.useState<ICats[] | []>([])
+	const [visible, setVisible] = React.useState(LIMIT)
+	const [more, setMore] = React.useState(true)
+
+	React.useEffect(() => {
+		setPostData(cats.slice(0, LIMIT))
+	}, [cats])
 
 
-	const cats = useSelector((state: RootState) => state.favorites.cats)
-
-	const dispatch = useDispatch()
-
-
-
-
-
-
-	if (!cats) {
-		return <>Загрузка...</>;
+	const fetchData = () => {
+		const newLimit = visible + LIMIT;
+		const addData = cats.slice(visible, newLimit);
+		if (cats.length > postData.length) {
+			setTimeout(() => setPostData([...postData].concat(addData)), 2000)
+			setVisible(newLimit)
+		} else {
+			setMore(false)
+		}
 	}
 
+
 	return (
-		<div className="cats__container">
+		<InfiniteScroll
+			className="cats__container"
+			dataLength={postData.length}
+			next={fetchData}
+			hasMore={more}
+			style={{ overflow: `visible` }}
+			loader={<div className='cats__gag'> Загрузка...</div >}
+			endMessage={<div className='cats__gag'>Вы посмотрели всех котиков</div>}
+		>
 			{
-				cats.map((cat: ICats) =>
+				postData.map((cat: ICats) =>
 					<Cat key={cat.id} url={cat.url} id={cat.id} />)
 			}
-		</div>
+		</InfiniteScroll >
+
 	)
 }
 
