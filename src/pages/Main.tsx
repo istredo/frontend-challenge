@@ -1,17 +1,26 @@
 import React from 'react';
-
+import { useSelector, useDispatch } from 'react-redux'
 
 import { ICats } from '../utils/interfaces';
 import Cat from '../components/Cat';
+import { RootState } from '../redux/store'
+
+const Main = () => {
 
 
-const Main: React.FC<{ cats: ICats[] | null }> = ({ cats }) => {
+	const cats = useSelector((state: RootState) => state.favorites.cats)
+
+	const dispatch = useDispatch()
+
+
+
+
 
 
 	if (!cats) {
 		return <>Загрузка...</>;
 	}
-	console.log(cats)
+
 	return (
 		<div className="cats__container">
 			{
@@ -22,4 +31,5 @@ const Main: React.FC<{ cats: ICats[] | null }> = ({ cats }) => {
 	)
 }
 
-export default React.memo(Main)
+// export default React.memo(Main)
+export default Main

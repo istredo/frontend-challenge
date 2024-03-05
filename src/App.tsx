@@ -1,29 +1,39 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, Outlet } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux'
 import { ICats } from './utils/interfaces';
-import Main from './pages/Main';
+import { setFavorite, setCats } from './redux/slices/favoriteSlice'
 
 function App() {
-	const [cats, setCats] = React.useState<ICats[] | null>(null)
+	// const [cats, setCats] = React.useState<ICats[] | null>(null)
 	const [home, setHome] = React.useState('home')
-	// const key = 'live_QtS0Dp5idEcUwsAriNi9C2PnwXXnpJOq4ELmuPY1BwbQGMEzg7Z9t9qKK9oYMUMH';
-
+	const key = 'live_QtS0Dp5idEcUwsAriNi9C2PnwXXnpJOq4ELmuPY1BwbQGMEzg7Z9t9qKK9oYMUMH';
+	const dispatch = useDispatch()
 	React.useEffect(() => {
 
 		async function fetchCats() {
 			try {
-				// const { data } = await axios.get<ICats>('https://api.thecatapi.com/v1/images/search?limit=5&api_key=' + key)
-				const { data } = await axios.get<ICats[]>('https://jsonplaceholder.typicode.com/photos')
-				setCats(data)
+				const { data } = await axios.get<ICats[]>('https://api.thecatapi.com/v1/images/search?limit=5&api_key=' + key)
+				// const { data } = await axios.get<ICats[]>('https://jsonplaceholder.typicode.com/photos')
+				dispatch(setCats(data))
 			} catch (error) {
 				alert('Error fetching')
 			}
 		}
 
+		async function parseStorage() {
+			try {
+				const data = await localStorage.getItem('favorites');
+				const favorite = data ? JSON.parse(data) : []
+				dispatch(setFavorite(favorite))
+			} catch (error) {
+				alert('Error fetching LS')
+			}
 
+		}
 		fetchCats()
+		parseStorage()
 
 	}, [])
 
@@ -36,7 +46,7 @@ function App() {
 				</div>
 			</header>
 			<section className='main container' >
-				<Main cats={cats} />
+				<Outlet />
 
 			</section >
 			<div className="loading">... загружаем еще котиков ...</div>

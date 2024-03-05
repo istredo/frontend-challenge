@@ -78,6 +78,7 @@
 			bottom: 23px;
 			opacity: 0;
 			z-index: 30;
+			transition: all 700ms ease;
 		}
 		.svg-liked {
 			opacity: 0;
@@ -118,7 +119,7 @@
 }
 
 // -Pseudo-classes---------------------------------------------------------------
-
+//
 a:active,
 a:hover,
 a {
