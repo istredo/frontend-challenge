@@ -13,7 +13,7 @@ const Main: React.FC<{ cats: ICats[] | null }> = ({ cats }) => {
 	}
 	console.log(cats)
 	return (
-		<div className="test__container">
+		<div className="cats__container">
 			{
 				cats.map((cat: ICats) =>
 					<Cat key={cat.id} url={cat.url} id={cat.id} />)

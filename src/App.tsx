@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-
+import { Link, Outlet } from 'react-router-dom'
 
 import { ICats } from './utils/interfaces';
 import Main from './pages/Main';
 
 function App() {
 	const [cats, setCats] = React.useState<ICats[] | null>(null)
-
+	const [home, setHome] = React.useState('home')
 	// const key = 'live_QtS0Dp5idEcUwsAriNi9C2PnwXXnpJOq4ELmuPY1BwbQGMEzg7Z9t9qKK9oYMUMH';
 
 	React.useEffect(() => {
@@ -31,8 +31,8 @@ function App() {
 		<div className="App">
 			<header className='header'>
 				<div className="container">
-					<div className="top">main</div>
-					<div className="top">liked</div>
+					<Link to={'/'} className={home === 'home' ? "header__main header__block --active" : "header__main header__block"} onClick={() => setHome('home')}>Все котики</Link>
+					<Link to={'/liked'} className={home === 'liked' ? "header__liked header__block --active" : "header__liked header__block"} onClick={() => setHome('liked')}>Любимые котики</Link>
 				</div>
 			</header>
 			<section className='main container' >
