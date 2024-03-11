@@ -38,7 +38,7 @@ function App() {
 
 		}
 
-		setHome(window.location.href.includes('liked'))
+		setHome(!window.location.href.includes('liked'))
 		fetchCats()
 		parseStorage()
 
