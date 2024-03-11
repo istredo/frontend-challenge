@@ -53,7 +53,7 @@ function App() {
 				<div className="container">
 					<Link to={'/'} className={home ? "header__main header__block --active" : "header__main header__block"} onClick={() => setHome(true)}>Все котики</Link>
 					<Link to={'/liked'} className={!home ? "header__liked header__block --active" : "header__liked header__block"} onClick={() => setHome(false)}>Любимые котики</Link>
-					<button className="header__block" onClick={fetchCats}> Обновить список котиков</button>
+					{home ? <button className="header__block" onClick={fetchCats}> Обновить список котиков</button> : ''}
 				</div>
 			</header>
 			<section className='main container' >
